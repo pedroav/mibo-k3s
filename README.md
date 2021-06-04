@@ -1,1 +1,2 @@
 # mibo-k3s
+Possuo cameras da linha mibo da intelbras e percebi que é possivel capturar as imagens delas via RTSP. Primeira versão dessa experiencia também está aqui no git, escrevi scripts em shellscript e rodei em um raspbian, instalei diretamente no raspberry. Pouco tempo depois, estudando kubernetes percebi que teria uma performance melhor se fizesse um POD com alpine para cada camera. Com o passar do tempo comecei a sincronizar os videos na nuvem, custo desse storage ficou alto então eu mudei de um AWS S3 para o Google Drive.
