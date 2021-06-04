@@ -1,0 +1,30 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: aws-upload
+  namespace: default
+spec:
+  schedule: "* */1 * * *"
+  startingDeadlineSeconds: 100
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: aws
+            image: woahbase/alpine-awscli:armv7l 
+            args:
+            - /bin/sh
+            - -c
+            - "aws configure set aws_access_key_id 'YOUR-ACCESS' ; aws configure set aws_secret_access_key 'YOUR-KEY' ; aws s3 sync PATH-LOCAL s3://YOUR-BUCKET/"
+            volumeMounts:
+            - name: storage          
+              mountPath: /YOUR/PATH
+          restartPolicy: OnFailure
+          volumes:
+          - name: storage
+            hostPath:
+              path: /YOUR/PATH
+              type: Directory
+

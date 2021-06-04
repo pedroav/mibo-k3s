@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ic5
+  namespace: default
+spec:
+  restartPolicy: Always
+  containers:
+  - image: collelog/ffmpeg:4.2.4-alpine-arm32v7
+    command:
+      - /bin/sh
+      - "-c"
+      - "mkdir -p /YOUR/PATH/$(date +%Y)/$(date +%m)/$(date +%d)/ ; ffmpeg -rtsp_transport tcp -i rtsp://$USER:$PASSWD@$CAM/cam/realmonitor -acodec aac -vcodec h264 -f segment -strftime 1 -segment_time 600 -segment_format mp4 /YOUR/PATH/%Y/%m/%d/back/%H-%M-%S.mp4"
+    env:
+      - name: CAM
+        value: IC5
+      - name: USER
+        value: "admin"
+      - name: PASSWD
+        value: "XXXXX" 
+    volumeMounts:
+      - mountPath: /YOUR/PATH
+        name: storage
+      - name: tz-config
+        mountPath: /etc/localtime
+    imagePullPolicy: IfNotPresent
+    name: alpine
+  volumes:
+    - name: storage
+      hostPath:
+        path: /YOUR/PATH
+        type: Directory
+    - name: tz-config
+      hostPath:
+        path: /usr/share/zoneinfo/America/Sao_Paulo
