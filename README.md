@@ -1,2 +1,16 @@
 # mibo-k3s
-Possuo cameras da linha mibo da intelbras e percebi que é possivel capturar as imagens delas via RTSP. Primeira versão dessa experiencia também está aqui no git, escrevi scripts em shellscript e rodei em um raspbian, instalei diretamente no raspberry. Pouco tempo depois, estudando kubernetes percebi que teria uma performance melhor se fizesse um POD com alpine para cada camera. Com o passar do tempo comecei a sincronizar os videos na nuvem, custo desse storage ficou alto então eu mudei de um AWS S3 para o Google Drive.
+
+Objetivo aqui é gravar imagens via rede local de cameras da linha Mibo da Intebras. Laboratorio foi montado com foco nas cameras iC3 e iC5, mas caso você possua modelos iM3 e iM5 leia o pdf. 
+
+Para funcionar corretamente você precisa definir algumas variaveis de ambiente:
+
+     - name: CAM
+       value: HOSTNAME
+     - name: USER
+       value: "admin"
+     - name: PASSWD
+       value: "XXXX"
+     - name: DIR
+       value: "/mnt/"
+
+O meu laboratio foi monado em cima de um cluster de raspberry, em outras palavras a imagem funciona apenas com arquitetura ARMv7. Se quiser posso buildar em outra arquitetura ou ensinar como fazer. 
