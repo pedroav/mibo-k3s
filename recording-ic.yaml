@@ -6,7 +6,7 @@ metadata:
 spec:
   restartPolicy: Always
   containers:
-  - image: pviana/mibo
+  - image: pviana/mibo:ic
     imagePullPolicy: IfNotPresent
     name: camera01
     env:
