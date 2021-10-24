@@ -14,7 +14,7 @@ spec:
         value: HOSTNAME
       - name: USER
         value: "admin"
-      - name: PASSWD
+      - name: PASS
         value: "XXXX"
       - name: DIR
         value: "/mnt/"
