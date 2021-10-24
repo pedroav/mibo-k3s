@@ -8,7 +8,7 @@ Para funcionar corretamente você precisa definir algumas variaveis de ambiente:
        value: HOSTNAME
      - name: USER
        value: "admin"
-     - name: PASSWD
+     - name: PASS
        value: "XXXX"
      - name: DIR
        value: "/mnt/"
