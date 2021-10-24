@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Pod
+metadata:
+  name: camera01
+  namespace: default
+spec:
+  restartPolicy: Always
+  containers:
+  - image: pviana/mibo
+    imagePullPolicy: IfNotPresent
+    name: camera01
+    env:
+      - name: CAM
+        value: HOSTNAME
+      - name: USER
+        value: "admin"
+      - name: PASSWD
+        value: "XXXX"
+      - name: DIR
+        value: "/mnt/"
+    volumeMounts:
+      - name: tz-config
+        mountPath: /etc/localtime
+  volumes:
+    - name: tz-config
+      hostPath:
+        path: /usr/share/zoneinfo/America/Sao_Paulo
